@@ -139,7 +139,7 @@ main (gint argc, gchar *argv[])
 
   test_error_trapping (gdk_display_get_default ());
 
-  extra_display = gdk_display_open (NULL);
+  extra_display = gdk_x11_display_open (NULL);
   test_error_trapping (extra_display);
   gdk_display_close (extra_display);
 
@@ -151,7 +151,7 @@ main (gint argc, gchar *argv[])
   gdk_error_trap_push ();
   gdk_error_trap_push ();
 
-  extra_display = gdk_display_open (NULL);
+  extra_display = gdk_x11_display_open (NULL);
   test_error_trapping (extra_display);
   gdk_display_close (extra_display);
 
