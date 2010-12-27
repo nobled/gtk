@@ -28,6 +28,7 @@
  */
 #include <string.h>
 #include <gtk/gtk.h>
+#include "x11/gdkx.h"
 #include "demo-common.h"
 
 /* The ChangeDisplayInfo structure corresponds to a toplevel window and
@@ -268,7 +269,7 @@ open_display_cb (GtkWidget         *button,
 
       if (strcmp (new_screen_name, "") != 0)
 	{
-	  result = gdk_display_open (new_screen_name);
+	  result = gdk_x11_display_open (new_screen_name);
 	  if (!result)
 	    {
 	      gchar *error_msg =
