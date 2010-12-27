@@ -248,9 +248,7 @@ struct _GdkWindow
 #define GDK_WINDOW_TYPE(d) (((GDK_WINDOW (d)))->window_type)
 #define GDK_WINDOW_DESTROYED(d) (GDK_WINDOW (d)->destroyed)
 
-extern gchar     *_gdk_display_name;
 extern gint       _gdk_screen_number;
-extern gchar     *_gdk_display_arg_name;
 extern gboolean   _gdk_disable_multidevice;
 
 GdkEvent* _gdk_event_unqueue (GdkDisplay *display);

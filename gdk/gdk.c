@@ -202,9 +202,6 @@ static const GOptionEntry gdk_args[] = {
   { "name",         0, 0,                     G_OPTION_ARG_CALLBACK, gdk_arg_name_cb,
     /* Description of --name=NAME in --help output */          N_("Program name as used by the window manager"),
     /* Placeholder in --name=NAME in --help output */          N_("NAME") },
-  { "display",      0, G_OPTION_FLAG_IN_MAIN, G_OPTION_ARG_STRING,   &_gdk_display_name,
-    /* Description of --display=DISPLAY in --help output */    N_("X display to use"),
-    /* Placeholder in --display=DISPLAY in --help output */    N_("DISPLAY") },
 #ifdef G_ENABLE_DEBUG
   { "gdk-debug",    0, 0, G_OPTION_ARG_CALLBACK, gdk_arg_debug_cb,  
     /* Description of --gdk-debug=FLAGS in --help output */    N_("GDK debugging flags to set"),
@@ -310,54 +307,6 @@ gdk_parse_args (int    *argc,
   g_option_context_free (option_context);
 
   GDK_NOTE (MISC, g_message ("progname: \"%s\"", g_get_prgname ()));
-}
-
-/**
- * gdk_get_display_arg_name:
- *
- * Gets the display name specified in the command line arguments passed
- * to gdk_init() or gdk_parse_args(), if any.
- *
- * Returns: the display name, if specified explicitely, otherwise %NULL
- *   this string is owned by GTK+ and must not be modified or freed.
- *
- * Since: 2.2
- */
-G_CONST_RETURN gchar *
-gdk_get_display_arg_name (void)
-{
-  if (!_gdk_display_arg_name)
-    _gdk_display_arg_name = g_strdup (_gdk_display_name);
-
-   return _gdk_display_arg_name;
-}
-
-/**
- * gdk_display_open_default_libgtk_only:
- *
- * Opens the default display specified by command line arguments or
- * environment variables, sets it as the default display, and returns
- * it.  gdk_parse_args must have been called first. If the default
- * display has previously been set, simply returns that. An internal
- * function that should not be used by applications.
- *
- * Return value: (transfer none): the default display, if it could be
- *   opened, otherwise %NULL.
- **/
-GdkDisplay *
-gdk_display_open_default_libgtk_only (void)
-{
-  GdkDisplay *display;
-
-  g_return_val_if_fail (gdk_initialized, NULL);
-
-  display = gdk_display_get_default ();
-  if (display)
-    return display;
-
-  display = gdk_display_open (gdk_get_display_arg_name ());
-
-  return display;
 }
 
 /**

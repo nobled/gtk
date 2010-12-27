@@ -205,8 +205,6 @@ GdkWindow *      gdk_display_get_window_at_device_position (GdkDisplay          
 GdkDisplayDeviceHooks *gdk_display_set_device_hooks (GdkDisplay                  *display,
                                                      const GdkDisplayDeviceHooks *new_hooks);
 
-GdkDisplay *gdk_display_open_default_libgtk_only (void);
-
 gboolean gdk_display_supports_cursor_alpha     (GdkDisplay    *display);
 gboolean gdk_display_supports_cursor_color     (GdkDisplay    *display);
 guint    gdk_display_get_default_cursor_size   (GdkDisplay    *display);

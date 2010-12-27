@@ -842,14 +842,12 @@ post_parse_hook (GOptionContext *context,
   
   if (info->open_default_display)
     {
-      if (gdk_display_open_default_libgtk_only () == NULL)
+      if (gdk_display_get_default () == NULL)
 	{
-	  const char *display_name = gdk_get_display_arg_name ();
 	  g_set_error (error, 
 		       G_OPTION_ERROR, 
 		       G_OPTION_ERROR_FAILED,
-		       _("Cannot open display: %s"),
-		       display_name ? display_name : "" );
+		       _("Cannot open display.") );
 	  
 	  return FALSE;
 	}
@@ -960,7 +958,7 @@ gtk_init_with_args (gint                 *argc,
   gboolean retval;
 
   if (gtk_initialized)
-    return gdk_display_open_default_libgtk_only () != NULL;
+    return gdk_display_get_default () != NULL;
 
   gettext_initialization ();
 
@@ -990,7 +988,7 @@ gtk_init_with_args (gint                 *argc,
  *
  * Parses command line arguments, and initializes global
  * attributes of GTK+, but does not actually open a connection
- * to a display. (See gdk_display_open(), gdk_get_display_arg_name())
+ * to a display. (See gdk_display_open())
  *
  * Any arguments used by GTK+ or GDK are removed from the array and
  * @argc and @argv are updated accordingly.
@@ -1060,7 +1058,7 @@ gtk_init_check (int	 *argc,
   if (!gtk_parse_args (argc, argv))
     return FALSE;
 
-  return gdk_display_open_default_libgtk_only () != NULL;
+  return gdk_display_get_default () != NULL;
 }
 
 #ifdef G_PLATFORM_WIN32
@@ -1106,10 +1104,7 @@ gtk_init (int *argc, char ***argv)
 {
   if (!gtk_init_check (argc, argv))
     {
-      const char *display_name_arg = gdk_get_display_arg_name ();
-      if (display_name_arg == NULL)
-        display_name_arg = getenv("DISPLAY");
-      g_warning ("cannot open display: %s", display_name_arg ? display_name_arg : "");
+      g_warning ("cannot init gtk");
       exit (1);
     }
 }
