@@ -20,6 +20,7 @@
 
 #include "config.h"
 #include <gtk/gtk.h>
+#include "x11/gdkx.h"
 
 gchar *screen2_name = NULL;
 
@@ -143,7 +144,7 @@ main (int argc, char *argv[])
 	  if (!g_ascii_strcasecmp (screen2_name, ""))
 	    g_printerr ("No display name, reverting to default display\n");
 	  
-	  dpy2 = gdk_display_open (screen2_name);
+	  dpy2 = gdk_x11_display_open (screen2_name);
 	  if (dpy2)
 	    {
 	      scr2 = gdk_display_get_default_screen (dpy2);
