@@ -1188,7 +1188,7 @@ set_sm_client_id (GdkDisplay  *display,
 }
 
 GdkDisplay *
-_gdk_x11_display_open (const gchar *display_name)
+gdk_x11_display_open (const gchar *display_name)
 {
   Display *xdisplay;
   GdkDisplay *display;

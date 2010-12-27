@@ -49,7 +49,7 @@ static GdkDisplay *
 gdk_x11_display_manager_open_display (GdkDisplayManager *manager,
                                       const gchar       *name)
 {
-  return _gdk_x11_display_open (name);
+  return gdk_x11_display_open (name);
 }
 
 static GSList *
