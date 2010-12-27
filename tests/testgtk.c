@@ -42,6 +42,7 @@
 #include "gtk/gtk.h"
 #include "gdk/gdk.h"
 #include "gdk/gdkkeysyms.h"
+#include "x11/gdkx.h"
 
 #ifdef G_OS_WIN32
 #define sleep(n) _sleep(n)
@@ -5577,7 +5578,7 @@ screen_display_check (GtkWidget *widget, ScreenDisplaySelection *data)
   if (gtk_toggle_button_get_active (GTK_TOGGLE_BUTTON (data->radio_dpy)))
     {
       display_name = gtk_entry_get_text (GTK_ENTRY (data->entry));
-      display = gdk_display_open (display_name);
+      display = gdk_x11_display_open (display_name);
       
       if (!display)
 	{
